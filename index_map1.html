@@ -1,0 +1,56 @@
+<html>
+<head>
+  <style>
+    #map-canvas {
+      height: 650px;
+      margin: 0px;
+      padding: 0px
+    }
+    #markers_info .marker {
+      height: 40px;
+      cursor: pointer;
+    }
+	
+	#myCanvas{
+		height:300px;
+		width: 300px;
+	}
+  </style>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?"></script>    
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+</head>
+<body>
+	<nav class="navbar navbar-light bg-light">
+	  <span class="navbar-brand mb-0 h1">Palaeography</span>
+	</nav>
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-6"></div>
+			<!-- <div class="bargraph"></div> -->
+				<!-- <canvas id="myCanvas" style="background: white;"></canvas> -->
+				<!-- <legend for="myCanvas"></legend> -->
+			<div class="col-6"></div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+			<div id="map-canvas"></div>
+			</div>
+			
+			<!-- <div class="col-6"> -->
+				<!-- <div id="markers_info"> -->
+					<!-- <div class="marker">Jeanneke Pis,   50.84848913,4.354053363</div> -->
+					<!-- <div class="marker">Grand Place,    50.84673465,4.352466166</div> -->
+					<!-- <div class="marker">Manneken Pis,   50.84498605,4.349977747</div> -->
+				<!-- </div> -->
+			<!-- </div> -->
+		</div>
+	</div>
+  
+</body>
+<script type="text/javascript" src="script.js"></script>
+<!-- <script type="text/javascript" src="chart.js"></script> -->
+</html>
