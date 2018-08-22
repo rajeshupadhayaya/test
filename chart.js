@@ -1,6 +1,6 @@
 var myCanvas = document.getElementById("myCanvas");
-myCanvas.width = 300;
-myCanvas.height = 300;
+// myCanvas.width = 100;
+// myCanvas.height = 100;
 var ctx = myCanvas.getContext("2d");
  
 function drawLine(ctx, startX, startY, endX, endY,color){
@@ -20,21 +20,81 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
     ctx.restore();
 }
  
-var myVinyls = {
-    "Classical music": 10,
-    "Alternative rock": 14,
-    "Pop": 2,
-    "Jazz": 12
-};
+// var myVinyls = {
+//     "Classical music": 10,
+//     "Alternative rock": 14,
+//     "Pop": 2,
+//     "Jazz": 12
+// };
  
+ var myVinyls = {
+    '-686' : 1,
+    '-683' : 1,
+    '-678' : 1,
+    '-552' : 1,
+    '-547' : 1,
+    '-544' : 1,
+    '-543' : 1,
+    '-540' : 1,
+    '-522' : 1,
+    '-497' : 1,
+    '-489' : 1,
+    '-485' : 1,
+    '-337' : 1,
+    '-331' : 1,
+    '-292' : 1,
+    '-265' : 2,
+    '-259' : 1,
+    '-256' : 1,
+    '-245' : 3,
+    '-244' : 1,
+    '-243' : 3,
+    '-240' : 4,
+    '-232' : 1,
+    '-230' : 1,
+    '-228' : 1,
+    '-224' : 1,
+    '-221' : 1,
+    '-220' : 1,
+    '-215' : 1,
+    '-213' : 1,
+    '-204' : 1,
+    '-160' : 1,
+    '-157' : 1,
+    '-145' : 1,
+    '-140' : 2,
+    '-137' : 1,
+    '-132' : 1,
+    '-131' : 1,
+    '-130' : 1,
+    '-124' : 2,
+    '-117' : 1,
+    '-115' : 1,
+    '-105' : 1,
+    '-103' : 1,
+    '-98' : 1,
+    '-81' : 1,
+    '-78' : 1,
+    '-64' : 1,
+    '-119' : 1,
+    '-180' : 1,
+    '-311' : 1,
+    '-365' : 1,
+    '-391' : 1,
+    '-500' : 1,
+    '-78' : 1
+    }
+
 var Barchart = function(options){
+    
     this.options = options;
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
     this.colors = options.colors;
   
     this.draw = function(){
-        var maxValue = 0;
+        // console.log("draw");
+        var maxValue = 10;
         for (var categ in this.options.data){
             maxValue = Math.max(maxValue,this.options.data[categ]);
         }
@@ -43,7 +103,9 @@ var Barchart = function(options){
  
         //drawing the grid lines
         var gridValue = 0;
+        
         while (gridValue <= maxValue){
+            console.log('draw');
             var gridY = canvasActualHeight * (1 - gridValue/maxValue) + this.options.padding;
             drawLine(
                 this.ctx,
@@ -86,38 +148,42 @@ var Barchart = function(options){
         }
  
         //drawing series name
+        
         this.ctx.save();
         this.ctx.textBaseline="bottom";
         this.ctx.textAlign="center";
         this.ctx.fillStyle = "#000000";
         this.ctx.font = "bold 14px Arial";
+        // this.ctx.fillText(this.options.seriesName, this.canvas.width/2,this.canvas.height);
         this.ctx.fillText(this.options.seriesName, this.canvas.width/2,this.canvas.height);
         this.ctx.restore();  
          
         //draw legend
-        barIndex = 0;
-        var legend = document.querySelector("legend[for='myCanvas']");
-        var ul = document.createElement("ul");
-        legend.append(ul);
-        for (categ in this.options.data){
-            var li = document.createElement("li");
-            li.style.listStyle = "none";
-            li.style.borderLeft = "20px solid "+this.colors[barIndex%this.colors.length];
-            li.style.padding = "5px";
-            li.textContent = categ;
-            ul.append(li);
-            barIndex++;
-        }
+        // barIndex = 0;
+        // var legend = document.querySelector("legend[for='myCanvas']");
+        // var ul = document.createElement("ul");
+        // legend.append(ul);
+        // for (categ in this.options.data){
+        //     var li = document.createElement("li");
+        //     li.style.listStyle = "none";
+        //     li.style.borderLeft = "20px solid "+this.colors[barIndex%this.colors.length];
+        //     li.style.padding = "5px";
+        //     li.textContent = categ;
+        //     ul.append(li);
+        //     barIndex++;
+        // }
     }
+
+    this.draw();
 }
  
  
 var myBarchart = new Barchart(
     {
         canvas:myCanvas,
-        seriesName:"Vinyl records",
+        seriesName:"years",
         padding:20,
-        gridScale:5,
+        gridScale:20,
         gridColor:"#eeeeee",
         data:myVinyls,
         colors:["#a55ca5","#67b6c7", "#bccd7a","#eb9743"]

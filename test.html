@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<!-- <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script> -->
+
+<script>
+
+    function initialize()
+    {
+        var map;
+        var bounds = new google.maps.LatLngBounds();
+        var mapOptions = {
+                            zoom: 10,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP    
+                         };
+        map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
+        var markers = [
+            ['title-1', '<img style="width:100%;" src="canberra_hero_image.jpg"></img>', 51.508742, -0.120850, '<p> Hello - 1 </p>'],
+            ['title-2', '<img style="width:100%;" src="canberra_hero_image.jpg"></img>', 51.508742, -0.420850, '<p> Hello - 2 </p>'],
+            ['title-3', '<img style="width:100%;" src="canberra_hero_image.jpg"></img>', 51.508742, -0.720850, '<p> Hello - 3 </p>'],
+            ['title-4', '<img style="width:100%;" src="canberra_hero_image.jpg"></img>', 51.508742, -1.020850, '<p> Hello - 4 </p>'],
+            ['title-5', '<img style="width:100%;" src="canberra_hero_image.jpg"></img>', 51.508742, -1.320850, '<p> Hello - 5 </p>']
+        ];
+
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+        var testMarker = [];
+        var status = [];
+        for( i = 0; i < markers.length; i++ ) 
+        {
+            var title = markers[i][0];
+            var loan = markers[i][1];
+            var lat = markers[i][2];
+            var long = markers[i][3];
+            var add = markers[i][4];
+
+
+            var iconGreen = 'img/greenMarker.png'; //green marker
+            var iconRed = 'img/redMarker.png';     //red marker
+
+            var infoWindowContent = loan + "\n" + placeId + add;
+
+            var position = new google.maps.LatLng(lat, long);
+            bounds.extend(position);
+
+            marker = new google.maps.Marker({
+                map: map,
+                title: title,
+                position: position,
+                icon: iconGreen
+            });
+            testMarker[i] = marker;
+            status[i] = 1;
+            google.maps.event.addListener(marker, 'click', ( function toggleBounce( i,status,testMarker) 
+            {
+                return function() 
+                {
+                    infoWindow.setContent(markers[i][1]+markers[i][4]);
+                    if( status[i] === 1 )
+                    {
+                        testMarker[i].setIcon(iconRed);
+                        status[i] = 0;
+
+                    }
+                    for( var k = 0; k <  markers.length ; k++ )
+                    {
+                        if(k != i)
+                        {
+                            testMarker[k].setIcon(iconGreen);
+                            status[i] = 1;
+
+                        }
+                    }
+                    infoWindow.open(map, testMarker[i]);
+                }
+            })( i,status,testMarker));
+            map.fitBounds(bounds);
+        }
+        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event)
+        {
+            this.setZoom(8);
+            google.maps.event.removeListener(boundsListener);
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+<div id="mapDiv" style="width:820px; height:300p
+</html>
