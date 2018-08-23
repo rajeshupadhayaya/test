@@ -1,7 +1,3 @@
-//total scale = 1200
-//from -800 to 400
-//ratio = 0.5
-
 var scale = 1200
 var size = 100
 var ratio = 0.5
@@ -10,11 +6,20 @@ var rulerratio = size * 0.5
 var rulerheight = 5;
 
 var prevx = 0;
-var prevy = 0;
+var prevy = 85;
 
-var cutoff_year = 325;
+var cutoff_year = 350;
 
-// console.log(scaled, negscale);
+var bar_len = 5;
+
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.width = 600;
+
+var canvas = document.getElementById("myCanvas1");
+var ctx1 = canvas.getContext("2d");
+
 
 var color = [
 	['black','grey'],
@@ -24,9 +29,13 @@ var color = [
 	['LIMEGREEN', 'SPRINGGREEN']
 ]
 
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-ctx.width = 600;
+var bars = {
+	'-635' : 5,
+	'-640' : 10,
+	'-648' : 8,
+	'50' : 4
+}
+
 
 function drawbase(){
 	var sector_len = cutoff_year / 4;
@@ -40,43 +49,33 @@ function drawbase(){
 		ctx.fillStyle = grd;
 		ctx.fillRect(x0,100,sector_len,rulerheight);
 		x0 += sector_len;
-
-	// var grd = ctx.createLinearGradient(100,0,200,0);
-	// grd.addColorStop(0,"indigo");
-	// grd.addColorStop(1,"SKYBLUE");
-	// ctx.fillStyle = grd;
-	// ctx.fillRect(100,100,100,rulerheight);
-
-	// var grd = ctx.createLinearGradient(200,0,300,0);
-	// grd.addColorStop(0,"DARKORANGE");
-	// grd.addColorStop(1,"yellow");
-	// ctx.fillStyle = grd;
-	// ctx.fillRect(200,100,100,rulerheight);
-
-	// var grd = ctx.createLinearGradient(300,0,400,0);
-	// grd.addColorStop(0,"gold");
-	// grd.addColorStop(1,"LIGHTYELLOW");
-	// ctx.fillStyle = grd;
-	// ctx.fillRect(300,100,100,rulerheight);	
+		// console.log(x0);
 	}
 	
 	var lef_len = 600 - x0;
-	console.log(lef_len);
-	var grd = ctx.createLinearGradient(lef_len,0,x0+lef_len,0);
+	// console.log(lef_len,x0);
+	var grd = ctx.createLinearGradient(x0,0,x0+lef_len,0);
 	grd.addColorStop(0,color[4][0]);
 	grd.addColorStop(1,color[4][1]);
 	ctx.fillStyle = grd;
-	ctx.fillRect(lef_len,100,x0+lef_len,rulerheight);	
+	ctx.fillRect(x0,100,x0+lef_len,rulerheight);	
+}
+
+function drawbars(){
+	Object.keys(bars).forEach(function(key) {
+		year = key;
+		x = (year/2) + 350;
+		height = bars[key] * 5;
+		// console.log(key,x);
+  		ctx.fillStyle = "brown";
+		ctx.fillRect(x,100+rulerheight,5,height);	
+	})
 }
 
 
 function hair(x,y){
-	// ctx.beginPath();
-	// ctx.lineWidth="3";
-	// ctx.strokeStyle="black";
-	ctx.fillStyle = "black";
-	ctx.fillRect(x,y,2,35);
-	// ctx.stroke();
+	ctx1.fillStyle = "grey";
+	ctx1.fillRect(x,y,2,35);
 	prevx = x;
 	prevy = y;
 
@@ -96,9 +95,17 @@ function measure_stick(){
 		ctx.rect(rulerdraw,106,0.5,10);
 		ctx.stroke();
 		ctx.strokeStyle="black";
-		ctx.font = "8px Arial";
+		ctx.font = "9px Arial";
+		ctx.fillStyle = "black";
 
-		ctx.fillText(rulerdraw,rulerdraw-15,130);
+		var year = (rulerdraw - 350) * 2 ;
+
+		var text = "AD";
+		if (year<0){
+			text = "BC";
+			year = year * -1;
+		}
+		ctx.fillText(year+text,rulerdraw-15,130);
 
 		rulerdraw += rulerratio;
 	}	
@@ -123,47 +130,35 @@ hair(300,85);
 drawbase();
 measure_stick();
 measure_stick1();
+drawbars();
 
 function movehair(x,y=85){
 	//left move
+	// console.log(prevx,x);
 	
 	if(prevx < x){
-		// console.log('moving left');
+		// console.log('moving right');
 		var direction = prevx;
 		while(direction <= x){
-			ctx.clearRect(prevx,prevy,2,35);
-			drawbase();
-			measure_stick();
-			measure_stick1();
+			ctx1.clearRect(prevx,prevy,2,35);
 			hair(direction,y);	
 			direction += 1;
-			// prevx += 1;
-			// return movehair(prevx,prevy);
 		}
-
-		
 	}
 
-	//right move
-	if(prevx >=x){
-		console.log('moving right');
+	//left move
+	if(prevx >x){
+		// console.log('moving left');
 		var direction = prevx;	
-		// console.log(prevx,prevy);
-
 		while(direction >= x){
 			// console.log(prevx,prevy);
-			ctx.clearRect(prevx,prevy,2,35);
-			drawbase();
-			measure_stick();
-			measure_stick1();
+			ctx1.clearRect(prevx,prevy,2,35);
+		
 			hair(direction,y);	
 			direction -= 1;
-			// prevx -= 1;
+		
 		}
 	}
-
-
 }
 
-// setInterval(movehair(0,85),3000);
 
