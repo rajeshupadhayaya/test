@@ -1,0 +1,91 @@
+.main-body{
+  		padding: 10px;
+}
+#map-canvas {
+  height: 650px;
+  margin: 0px;
+  padding: 0px
+}
+#markers_info{
+	/*margin-left: 30px;*/
+    /*border: solid 1px;*/
+    /*border-color: grey;*/
+    /*border-radius: 10px;*/
+    padding-top: 10px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+	height: 650px;
+}
+
+#markers_info:hover{
+	overflow-y: scroll;
+
+}
+
+#markers_info .marker {
+  height: 40px;
+  cursor: pointer;
+}
+
+#myCanvas{
+	height:130px;
+	/*width: 50%;*/
+	border-radius: 10px;
+	position: absolute;
+}
+
+#myCanvas1{
+	height:130px;
+	/*width: 50%;*/
+	position: relative;
+	border-radius: 10px;
+}
+
+.images{
+	width: 100%;
+	height: 90px;
+	border:solid;
+	border-radius: 5px;
+}
+
+.image-box{
+	/*border: solid 0.5px;*/
+	/*border-radius: 5px;*/
+	margin: 15px;
+	position: relative;
+}
+
+.image-box .tooltiptext {
+    visibility: hidden;
+    /*width: 100%;*/
+    min-width: 150px;
+    max-width: 300px;
+    background-color: black;
+    color: #fff;
+    margin: 8px;
+    /*text-align: center;*/
+    padding: 5px;
+    border-radius: 6px;
+ 	font-size: 10px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.image-box:hover .tooltiptext {
+    visibility: visible;
+}
+.canvas_frame{
+	position: relative;
+}
+
+.images:hover{
+	box-shadow: 5px 5px 10px black;	
+	height: 100px;
+}
+
+.list-header{
+    width: 100%;
+    padding-left: 15px;
+    padding-top: 10px;
+}

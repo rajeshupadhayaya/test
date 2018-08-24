@@ -1,8 +1,8 @@
-var scale = 1200
-var size = 100
-var ratio = 0.5
-var scaleratio = scale * 0.5
-var rulerratio = size * 0.5
+var scale = 1200;
+var size = 100;
+var ratio = 0.5;
+var scaleratio = scale * 0.5;
+var rulerratio = size * 0.5;
 var rulerheight = 5;
 
 var prevx = 0;
@@ -16,7 +16,6 @@ var bar_len = 5;
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 ctx.width = 600;
-
 var canvas = document.getElementById("myCanvas1");
 var ctx1 = canvas.getContext("2d");
 
@@ -30,10 +29,42 @@ var color = [
 ]
 
 var bars = {
-	'-635' : 5,
-	'-640' : 10,
-	'-648' : 8,
-	'50' : 4
+	// '-635' : 5,
+	// '-640' : 10,
+	// '-648' : 8,
+	// '50' : 4
+	'-686' : 1,
+	'-683' : 1,
+	'-678' : 1,
+	'-547' : 1,
+	'-544' : 1,
+	'-540' : 1,
+	'-497' : 1,
+	'-489' : 1,
+	'-485' : 1,
+	'-265' : 2,
+	'-245' : 2,
+	'-243' : 2,
+	'-240' : 4,
+	'-232' : 1,
+	'-230' : 1,
+	'-228' : 1,
+	'-224' : 1,
+	'-220' : 1,
+	'-215' : 1,
+	'-213' : 1,
+	'-180' : 1,
+	'-157' : 1,
+	'-145' : 1,
+	'-140' : 2,
+	'-137' : 1,
+	'-124' : 2,
+	'-119' : 1,
+	'-115' : 1,
+	'-105' : 1,
+	'-103' : 1,
+	'-98' : 1,
+	'-78' : 1
 }
 
 
@@ -49,11 +80,9 @@ function drawbase(){
 		ctx.fillStyle = grd;
 		ctx.fillRect(x0,100,sector_len,rulerheight);
 		x0 += sector_len;
-		// console.log(x0);
 	}
 	
 	var lef_len = 600 - x0;
-	// console.log(lef_len,x0);
 	var grd = ctx.createLinearGradient(x0,0,x0+lef_len,0);
 	grd.addColorStop(0,color[4][0]);
 	grd.addColorStop(1,color[4][1]);
@@ -65,17 +94,21 @@ function drawbars(){
 	Object.keys(bars).forEach(function(key) {
 		year = key;
 		x = (year/2) + 350;
-		height = bars[key] * 5;
-		// console.log(key,x);
+		height = bars[key] * 15;
   		ctx.fillStyle = "brown";
-		ctx.fillRect(x,100+rulerheight,5,height);	
+		ctx.fillRect(x,100-height,5,height);	
 	})
 }
 
 
 function hair(x,y){
-	ctx1.fillStyle = "grey";
-	ctx1.fillRect(x,y,2,35);
+	ctx1.shadowBlur=20;
+	ctx1.shadowColor="black";
+	ctx1.fillStyle = "black";
+	ctx1.strokeStyle="rgba(0,0,0,1)";
+	ctx1.fillRect(x,y,5,35);
+	// ctx1.rect(x,y,2,35);
+	// ctx1.stroke();
 	prevx = x;
 	prevy = y;
 
@@ -88,7 +121,6 @@ function measure_stick(){
 	var rulerdraw = 0;
 
 	while( rulerdraw <= scaleratio){
-	// console.log(rulerdraw);
 		ctx.beginPath();
 		ctx.lineWidth="1";
 		ctx.strokeStyle="grey";
@@ -104,6 +136,11 @@ function measure_stick(){
 		if (year<0){
 			text = "BC";
 			year = year * -1;
+			
+		}
+
+		if(year == 0){
+				year = 1;
 		}
 		ctx.fillText(year+text,rulerdraw-15,130);
 
@@ -140,7 +177,8 @@ function movehair(x,y=85){
 		// console.log('moving right');
 		var direction = prevx;
 		while(direction <= x){
-			ctx1.clearRect(prevx,prevy,2,35);
+			// ctx1.clearRect(prevx,prevy,2,35);
+			ctx1.clearRect(0,0,canvas.width,canvas.height);
 			hair(direction,y);	
 			direction += 1;
 		}
@@ -152,8 +190,9 @@ function movehair(x,y=85){
 		var direction = prevx;	
 		while(direction >= x){
 			// console.log(prevx,prevy);
-			ctx1.clearRect(prevx,prevy,2,35);
-		
+			ctx1.clearRect(0,0,canvas.width,canvas.height);
+			// ctx1.clearRect(prevx,prevy,2,35);
+			
 			hair(direction,y);	
 			direction -= 1;
 		

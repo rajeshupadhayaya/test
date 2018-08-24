@@ -1,104 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  	.main-body{
-  		padding: 10px;
-  	}
-    #map-canvas {
-      height: 650px;
-      margin: 0px;
-      padding: 0px
-    }
-    #markers_info{
-    	margin-left: 30px;
-	    border: solid 1px;
-	    border-color: grey;
-	    border-radius: 10px;
-	    padding-top: 10px;
-	    overflow-y: scroll;
-	    overflow-x: hidden;
-    	height: 650px;
-    }
-
-    #markers_info .marker {
-      height: 40px;
-      cursor: pointer;
-    }
-	
-	#myCanvas{
-		height:130px;
-		border-radius: 10px;
-		position: absolute;
-	}
-
-	#myCanvas1{
-		height:130px;
-		position: relative;
-		border-radius: 10px;
-	}
-
-	.images{
-		width: 100%;
-		height: 90px;
-		border:solid;
-		border-radius: 5px;
-	}
-
-	.image-box{
-		/*border: solid 0.5px;*/
-		/*border-radius: 5px;*/
-		margin: 15px;
-	}
-
-	.canvas_frame{
-		position: relative;
-	}
-
-	.images:hover{
-		box-shadow: 5px 5px;	
-	}
-
-	.list-header{
-	    width: 100%;
-	    padding-left: 15px;
-	    padding-top: 10px;
-	}
-
-	.list{
-
-	}
-
-	.notice{
-
-	}
-
-
-  </style>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?"></script>    
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <link href="style.css" rel="stylesheet">
   
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light ">
+	<nav class="navbar navbar-dark bg-primary ">
 	  <span class="navbar-brand mb-0 h1 ">Palaeography</span>
 	  
+	</div>
 	</nav>
 	<div class="container" style="padding-top: 20px;">
 		
+		<div class="row">
+			<div class="col-6">
 				
-		<div class="canvas_frame">
-			<canvas id="myCanvas" width="600" style="border:1px solid #c3c3c3;">
-					Your browser does not support the canvas element.
-					</canvas>
-			<canvas id="myCanvas1" width="600" style="border:1px solid #c3c3c3;">
-					Your browser does not support the canvas element.
-					</canvas>
+				<canvas id="myCanvas" width="600px" style="border:1px solid #c3c3c3;">
+						Your browser does not support the canvas element.
+						</canvas>
+				<canvas id="myCanvas1" width="600px" style="border:1px solid #c3c3c3;">
+						Your browser does not support the canvas element.
+						</canvas>
+				
+			</div>
+
+			<div class="col-6"> 
+				<div>
+					This Section has another header
+				</div>
+			</div>
 		</div>
 				
-			
 		<div class="row">
 			<div class="col-6">
 				<div class="map-area">
