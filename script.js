@@ -29,7 +29,7 @@ function highlight(lat,lng,year,title=null){
             icon: highlightedIcon()
           });
 	markers.push(marker);
-	map.setCenter(google.maps.LatLng(lat, lng));
+	// map.setCenter(google.maps.LatLng(lat, lng));
 };
 
 
